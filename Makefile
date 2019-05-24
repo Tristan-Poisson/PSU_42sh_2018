@@ -5,7 +5,9 @@
 ## Makefile
 ##
 
-FILES =
+FILES = search.c \
+		exec_file.c \
+		exec_com.c
 
 MAIN = src/main.c
 

@@ -5,7 +5,17 @@
 ** Main file
 */
 
-int main(void)
+#include <stdio.h>
+
+int main(int ac, char **av)
 {
-    return (0);
+    int ret = 0;
+
+    if (ac != 0) {
+        printf("%s", "Invalid argument\n");
+        exit(0);
+    }
+    if (ac == 0)
+        ret = exec_file(stdin);
+    return (ret);
 }
