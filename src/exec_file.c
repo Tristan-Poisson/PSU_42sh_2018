@@ -9,9 +9,12 @@
 
 char *recover_line(FILE *file)
 {
+    int fd = fileno(file);
     char *temp = NULL;
     size_t n = 0;
 
+    if (isatty(fd))
+        printf("%s", "^-^/~");
     if (getline(&temp, &n, file) == -1)
         return (NULL);
     return (temp);
