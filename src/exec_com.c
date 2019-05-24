@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <stdio.h>
 #include <string.h>
 extern char **environ;
 
@@ -19,6 +20,7 @@ char *build_an_access(char *wipath, char *name)
     int len = strlen(wipath);
     int len_max = (strlen(wipath) + strlen(name) + 1);
     char *result = malloc(sizeof(char) * (len_max + 1));
+    int pos = 0;
 
     for (int i = 0; wipath[i] != '\0'; i++)
         result[pos++] = wipath[i];
@@ -50,7 +52,7 @@ int find_command(char **command)
         if (!access(to_test, F_OK))
             return (my_exec(command, to_test));
     }
-    fprintf(stderr, "%s" command[0]);
+    fprintf(stderr, "%s", command[0]);
     fprintf(stderr, "%s", ": Command not found.\n");
     return (84);
 }
@@ -71,7 +73,7 @@ int my_exec(char **command, char *path)
     waitpid(child, &wstatus, 0);
     if (WIFSIGNALED(wstatus)) {
         if (WTERMSIG(wstatus) == SIGFPE)
-            fprint(stderr, "%s", "Floating exception");
+            fprintf(stderr, "%s", "Floating exception");
         else
             fprintf(stderr, "%s", strsignal(WTERMSIG(wstatus)));
         if (WCOREDUMP(wstatus))

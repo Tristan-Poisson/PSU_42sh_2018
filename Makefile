@@ -13,7 +13,7 @@ MAIN = src/main.c
 
 SRC = $(addprefix src/,$(FILES))
 
-OBJ = $(notdir $(SRC:.c=.o)) $(notdir $(MAIN.c=.o))
+OBJ = $(notdir $(SRC:.c=.o)) $(notdir $(MAIN:.c=.o))
 
 I_PATH = include/
 
