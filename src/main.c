@@ -10,12 +10,17 @@
 int main(int ac, char **av)
 {
     int ret = 0;
+    FILE *file;
 
-    if (ac != 0) {
-        printf("%s", "Invalid argument\n");
+    if (ac > 2) {
+        printf("%s", "Too much argument\n");
         exit(0);
     }
-    if (ac == 0)
+    if (ac == 2) {
+        file = fopen(av[1], "r");
+        ret = exec_file(file);
+    }
+    if (ac == 1)
         ret = exec_file(stdin);
     return (ret);
 }
