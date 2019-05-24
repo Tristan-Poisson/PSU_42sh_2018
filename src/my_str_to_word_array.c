@@ -7,6 +7,7 @@
 
 #include "prototypes.h"
 #include <stdlib.h>
+#include <string.h>
 
 int is_in(char c, char *blanks)
 {

@@ -5,7 +5,8 @@
 ** Main file
 */
 
-#include <stdio.h>
+#include "prototypes.h"
+#include <stdlib.h>
 
 int main(int ac, char **av)
 {

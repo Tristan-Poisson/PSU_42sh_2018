@@ -11,5 +11,5 @@
 
 void my_perror(char *name)
 {
-    fprintf(stderr, "%s: %s.\n", name, sterror(errno));
+    fprintf(stderr, "%s: %s.\n", name, strerror(errno));
 }

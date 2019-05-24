@@ -5,7 +5,10 @@
 ** Select how to execute
 */
 
+#include "prototypes.h"
+#include "my_builtins.h"
 #include <stddef.h>
+#include <string.h>
 
 int select_my_exec(char **command)
 {

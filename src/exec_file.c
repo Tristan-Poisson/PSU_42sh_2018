@@ -5,7 +5,7 @@
 ** File who execute file
 */
 
-#include <stdio.h>
+#include "prototypes.h"
 #include <unistd.h>
 
 char *recover_line(FILE *file)
@@ -27,7 +27,7 @@ int exec_file(FILE *file)
     char **command;
     int ret_t = 0;
 
-    while (line = recover_line(file)) {
+    while (line == recover_line(file)) {
         command = my_str_to_word_array(line, " \n\t");
         ret_t = select_my_exec(command);
     }
