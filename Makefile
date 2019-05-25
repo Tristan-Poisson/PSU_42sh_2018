@@ -13,6 +13,7 @@ FILES = search.c \
 		builtin.c \
 		built_in_env.c \
 		built_in_exit.c \
+		built_in_cd.c \
 		my_error.c
 
 MAIN = src/main.c
