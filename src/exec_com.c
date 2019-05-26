@@ -43,10 +43,16 @@ int is_path(char *path)
 
 int find_command(char **command)
 {
+    char *maybe_path = getenv("PATH");
     char **path;
     char *to_test;
 
-    path = my_str_to_word_array(getenv("PATH"), ":");
+    if (maybe_path == NULL) {
+        fprintf(stderr, "%s", command[0]);
+        fprintf(stderr, "%s", ": Command not found.\n");
+        return (84);
+    }
+    path = my_str_to_word_array(maybe_path, ":");
     for (int i = 0; path[i] != NULL; i++) {
         to_test = build_an_access(path[i], command[0]);
         if (!access(to_test, F_OK))
