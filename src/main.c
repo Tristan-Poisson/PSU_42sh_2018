@@ -7,6 +7,7 @@
 
 #include "prototypes.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 int main(int ac, char **av)
 {
@@ -18,8 +19,13 @@ int main(int ac, char **av)
         exit(0);
     }
     if (ac == 2) {
-        file = fopen(av[1], "r");
-        ret = exec_file(file);
+        if (!access(av[1], R_OK)) {
+            file = fopen(av[1], "r");
+            ret = exec_file(file);
+        } else {
+            fprintf(stderr, "%s", "Can't read file\n");
+            exit(0);
+        }
     }
     if (ac == 1)
         ret = exec_file(stdin);
