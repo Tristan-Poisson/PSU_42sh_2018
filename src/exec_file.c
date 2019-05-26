@@ -28,6 +28,8 @@ int exec_file(FILE *file)
     int ret_t = 0;
 
     while (line = recover_line(file)) {
+        if (line[0] == '\n' && line[1] == '\0')
+            continue;
         command = my_str_to_word_array(line, " \n\t");
         ret_t = select_my_exec(command);
     }
