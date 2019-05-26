@@ -14,18 +14,20 @@
 
 void p_error(void)
 {
-    fprintf(stderr,"%s", "cd: Too many arguments.\n");
+    fprintf(stderr, "%s", "cd: Too many arguments.\n");
 }
 
 void end_cd(char **command)
 {
-    char * pwd;
-    char * oldpwd;
+    char *pwd;
+    char *oldpwd;
 
+    if (chdir(command[1]) == -1) {
+        my_perror(command[1]);
+        return (84);
+    }
     oldpwd = getenv("PWD");
     pwd = command[1];
-    if (chdir(pwd) == -1)
-        my_perror(pwd);
     setenv("PWD", pwd, 1);
     setenv("OLDPWD", oldpwd, 1);
 }
