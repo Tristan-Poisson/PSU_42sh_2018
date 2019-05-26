@@ -42,7 +42,7 @@ int my_exit(char **command);
 
 // built_in_cd.c
 void p_error(void);
-void end_cd(char **command);
+int end_cd(char **command);
 int next_cd(char **command, int args);
 int my_cd(char **command);
 

@@ -17,7 +17,7 @@ void p_error(void)
     fprintf(stderr, "%s", "cd: Too many arguments.\n");
 }
 
-void end_cd(char **command)
+int end_cd(char **command)
 {
     char *pwd;
     char *oldpwd;
@@ -30,6 +30,7 @@ void end_cd(char **command)
     pwd = command[1];
     setenv("PWD", pwd, 1);
     setenv("OLDPWD", oldpwd, 1);
+    return (0);
 }
 
 int next_cd(char **command, int args)
@@ -52,6 +53,7 @@ int next_cd(char **command, int args)
         end_cd(command);
     }
     fflush(stdout);
+    return (0);
 }
 
 int my_cd(char **command)
@@ -72,7 +74,7 @@ int my_cd(char **command)
         setenv("PWD", pwd, 1);
         setenv("OLDPWD", oldpwd, 1);
     }
-
     next_cd(command, args);
     fflush(stdout);
+    return (0);
 }
