@@ -5,6 +5,7 @@
 ** redirect
 */
 
+#include "prototypes.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -18,7 +19,7 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
     int rs = dup(1);
 
     dup2(fd, 1);
-    write(1, "test2\n", 6);
+    select_my_exec(cmd);
     dup2(1, rs);
     return (0);
 }
@@ -30,22 +31,23 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
     int	rs = dup(1);
 
     dup2(fd, 1);
-    write(1, "test2\n", 6);
+    select_my_exec(cmd);
     dup2(1, rs);
     return (0);
 }
 
-int chev_op(void)
+int chev_op(char *file, char **cmd)
 {
     int fd = open(file, O_RDWR);
     int rs = dup(0);
 
     dup2(fd, 0);
+   select_my_exec(cmd);
     dup2(0, rs);
     return (0);
 }
 
-int d_chev_op(void)
+int d_chev_op(char *end, char **cmd)
 {
     FILE *tmp = tmpfile();
     int fd = fileno(tmp);
@@ -62,6 +64,7 @@ int d_chev_op(void)
     }
     rewind(tmp);
     dup2(fd, 0);
+    select_my_exec(cmd);
     dup2(0, rs);
     return (0);
 }
