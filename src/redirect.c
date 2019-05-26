@@ -14,7 +14,7 @@
 int chev(char *file, char **cmd)
 {
     int fd = open(file, O_RDWR | O_CREAT | O_TRUNC,
-                  S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
     int rs = dup(1);
 
     dup2(fd, 1);
@@ -26,7 +26,7 @@ int chev(char *file, char **cmd)
 int d_chev(char *file, char **cmd)
 {
     int	fd = open(file, O_RDWR | O_CREAT | O_APPEND,
-                  S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
     int	rs = dup(1);
 
     dup2(fd, 1);
@@ -50,9 +50,18 @@ int d_chev_op(void)
     FILE *tmp = tmpfile();
     int fd = fileno(tmp);
     int rs = dup(0);
+    char *temp = NULL;
+    size_t n = 0;
 
     while (1) {
-
+        printf("%s", "?");
+        if (getline(&temp, &n, stdin) == -1 || strcmp(temp, end) == 0)
+            break;
+        else
+            fprintf(tmp, "%s", temp);
     }
+    rewind(tmp);
+    dup2(fd, 0);
+    dup2(0, rs);
     return (0);
 }
